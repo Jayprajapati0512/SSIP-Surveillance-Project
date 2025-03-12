@@ -8,7 +8,7 @@ const Navbar = () => {
       <nav className="gap-6 flex">
         {[
           { name: "Home", path: "/" },
-          { name: "Past Incidents", path: "/past-incidents" },
+          { name: "Past Incidents", path: "/past incidents" },
           { name: "Settings", path: "/settings" },
           { name: "Login", path: "/login" },
         ].map((link) => (

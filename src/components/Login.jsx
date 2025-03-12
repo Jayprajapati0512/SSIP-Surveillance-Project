@@ -1,41 +1,133 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
-  return (
-    <div className="h-screen flex items-center justify-center bg-gray-900 text-white">
-      <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
-        <h1 className="text-3xl font-bold text-center mb-4">Login</h1>
-        
-        <form className="space-y-4">
-          <div>
-            <label className="block mb-1">Email:</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-2 text-black rounded bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+const Auth = () => {
+    const [isLogin, setIsLogin] = useState(true); // Toggle between login & sign up
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
-          <div>
-            <label className="block mb-1">Password:</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="w-full px-4 py-2 text-black rounded bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+    const navigate = useNavigate();
 
-          <button
-            type="submit"
-            className="w-full px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg"
-          >
-            Login
-          </button>
-        </form>
-      </div>
-    </div>
-  );
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const storedEmail = localStorage.getItem("email");
+        const storedPass = localStorage.getItem("password");
+
+        if (email === storedEmail && password === storedPass) {
+            alert("Login Successful! 🎉");
+            setEmail(""); // Clear email field
+            setPassword(""); // Clear password field
+            navigate("/"); // Redirect to home
+        } else {
+            alert("Invalid Credentials ❌");
+        }
+    };
+
+    const handleSignUp = (e) => {
+        e.preventDefault();
+        if (!firstName || !lastName || !email || !password) {
+            alert("All fields are required! 🚨");
+            return;
+        }
+        localStorage.setItem("firstName", firstName);
+        localStorage.setItem("lastName", lastName);
+        localStorage.setItem("email", email);
+        localStorage.setItem("password", password);
+        alert("Sign-up successful! Now login 😊");
+        setIsLogin(true); // Show login UI
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setPassword("");
+    };
+
+    return (
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="bg-white p-8 rounded-lg shadow-lg w-96">
+                {isLogin ? (
+                    <>
+                        <h2 className="text-2xl font-bold text-center mb-4">Login</h2>
+                        <form onSubmit={handleLogin} className="space-y-4">
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                required
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                required
+                            />
+                            <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded-lg hover:bg-blue-600">
+                                Login
+                            </button>
+                        </form>
+                        <p className="text-center mt-4 text-gray-600">
+                            New user?{" "}
+                            <button onClick={() => setIsLogin(false)} className="text-blue-500 hover:underline">
+                                Sign Up
+                            </button>
+                        </p>
+                    </>
+                ) : (
+                    <>
+                        <h2 className="text-2xl font-bold text-center mb-4">Sign Up</h2>
+                        <form onSubmit={handleSignUp} className="space-y-4">
+                            <input
+                                type="text"
+                                placeholder="First Name"
+                                value={firstName}
+                                onChange={(e) => setFirstName(e.target.value)}
+                                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                required
+                            />
+                            <input
+                                type="text"
+                                placeholder="Last Name"
+                                value={lastName}
+                                onChange={(e) => setLastName(e.target.value)}
+                                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                required
+                            />
+                            <input
+                                type="email"
+                                placeholder="Email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                required
+                            />
+                            <input
+                                type="password"
+                                placeholder="Password"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                className="w-full p-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                                required
+                            />
+                            <button type="submit" className="w-full bg-green-500 text-white p-2 rounded-lg hover:bg-green-600">
+                                Sign Up
+                            </button>
+                        </form>
+                        <p className="text-center mt-4 text-gray-600">
+                            Already have an account?{" "}
+                            <button onClick={() => setIsLogin(true)} className="text-blue-500 hover:underline">
+                                Login
+                            </button>
+                        </p>
+                    </>
+                )}
+            </div>
+        </div>
+    );
 };
 
-export default Login;
+export default Auth;

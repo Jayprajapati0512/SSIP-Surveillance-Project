@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from "react";
 
-
 const PastIncidents = () => {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
