@@ -3,16 +3,15 @@ import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="w-full bg-gray-900 text-white py-6 flex flex-col items-center justify-center">
+    <footer className="w-full h-fit bg-gray-900 text-white py-6 flex flex-col items-center justify-center">
       {/* Main Footer Content */}
       <div className="w-full max-w-6xl flex flex-wrap justify-between px-5 md:px-10">
         
         {/* Company Info */}
         <div className="w-full md:w-1/3 mb-4 md:mb-0">
-          <h1 className="text-2xl font-bold">Surveillance System</h1>
-          <p className="text-sm opacity-80 mt-2">
-            Advanced real-time monitoring and anomaly detection system for enhanced security.
-          </p>
+        
+          <h1 className="text-2xl font-bold flex w-full justify-center my-5 "> <img className="h-[15vh] rounded-xl" src="/photo/logo.jpg"></img></h1>
+         
         </div>
 
         {/* Quick Links */}
@@ -20,7 +19,7 @@ const Footer = () => {
           <h2 className="text-xl font-semibold mb-2">Quick Links</h2>
           <ul className="text-sm opacity-80">
             <li><a href="/" className="hover:underline">Home</a></li>
-            <li><a href="/past-incidents" className="hover:underline">Past Incidents</a></li>
+            <li><a href="/past-incidents" className="hover:underline">Past Records</a></li>
             <li><a href="/settings" className="hover:underline">Settings</a></li>
             <li><a href="/login" className="hover:underline">Login</a></li>
           </ul>
@@ -44,7 +43,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright Notice */}
-      <p className="text-sm opacity-70 mt-4">© 2025 Surveillance System. All rights reserved.</p>
+      <p className="text-sm opacity-70 mt-4">© 2025 Civic AI. All rights reserved.</p>
     </footer>
   );
 };

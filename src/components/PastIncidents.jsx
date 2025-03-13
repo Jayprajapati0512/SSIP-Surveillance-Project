@@ -4,7 +4,7 @@ import React, { useState } from "react";
 const PastIncidents = () => {
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
-  const [selectedVideo, setSelectedVideo] = useState(null);
+  const [selectedPhoto, setSelectedPhoto] = useState(null);
 
   const cameras = {
     Gujarat: {
@@ -13,13 +13,13 @@ const PastIncidents = () => {
           id: 1,
           name: "Camera 101",
           eventDate: "2024-02-15",
-          videoLink: "https://youtu.be/O_gv4_N_w3Y",
+          photoLink: "/Photo/damage2.jpg",
         },
         {
           id: 2,
           name: "Camera 102",
           eventDate: "2024-01-10",
-          videoLink: "https://example.com/video2.mp4",
+          photoLink: "/Photo/damage2.jpg",
         },
       ],
       Surat: [
@@ -27,13 +27,13 @@ const PastIncidents = () => {
           id: 3,
           name: "Camera 103",
           eventDate: "2023-12-05",
-          videoLink: "https://example.com/video3.mp4",
+          photoLink: "/Photo/damage2.jpg",
         },
         {
           id: 4,
           name: "Camera 104",
           eventDate: "2024-03-02",
-          videoLink: "https://example.com/video4.mp4",
+          photoLink: "/Photo/damage2.jpg",
         },
       ],
       Vadodara: [
@@ -41,13 +41,13 @@ const PastIncidents = () => {
           id: 5,
           name: "Camera 105",
           eventDate: "2024-01-22",
-          videoLink: "https://example.com/video5.mp4",
+          photoLink: "/Photo/damage2.jpg",
         },
         {
           id: 6,
           name: "Camera 106",
           eventDate: "2023-11-30",
-          videoLink: "https://example.com/video6.mp4",
+          photoLink: "/Photo/damage2.jpg",
         },
       ],
     },
@@ -58,23 +58,23 @@ const PastIncidents = () => {
   const handleStateChange = (event) => {
     setSelectedState(event.target.value);
     setSelectedCity("");
-    setSelectedVideo(null);
+    setSelectedPhoto(null);
   };
 
   const handleCityChange = (event) => {
     setSelectedCity(event.target.value);
-    setSelectedVideo(null);
+    setSelectedPhoto(null);
   };
 
-  const handleVideoPlay = (videoLink) => {
-    setSelectedVideo(videoLink);
+  const handlePhotoView = (photoLink) => {
+    setSelectedPhoto(photoLink);
   };
 
   return (
     <div className="flex w-full h-screen text-white">
       {/* Left Section */}
       <div className="left w-[50%] p-5">
-        <h1 className="text-4xl font-bold text-center my-5">Previous Incidents</h1>
+        <h1 className="text-4xl font-bold text-center my-5">Previous Workflow</h1>
 
         {/* State Dropdown */}
         <div className="mx-5 border px-10 py-3 border-cyan-500 rounded-xl">
@@ -111,7 +111,7 @@ const PastIncidents = () => {
         {/* Incident List */}
         <div>
           <h2 className="text-3xl text-center mt-10 font-semibold mb-5">
-            Previous Incidents in {selectedCity || "Selected City"}
+            Previous Work in {selectedCity || "Selected City"}
           </h2>
           {selectedCity ? (
             filteredCameras.length > 0 ? (
@@ -119,23 +119,23 @@ const PastIncidents = () => {
                 {filteredCameras.map((camera) => (
                   <li
                     key={camera.id}
-                    className="border-2 flex justify-between px-2 py-3 items-center"
+                    className="border-[1px] m-2 flex justify-between px-2 py-3 items-center"
                   >
                     <div>
                       <strong>{camera.name}</strong> <br />
-                      <small>Incident Date: {camera.eventDate}</small>
+                      <small>WorkDone Date: {camera.eventDate}</small>
                     </div>
                     <button
                       className="px-3 py-1 bg-cyan-600 hover:bg-cyan-500 rounded-lg"
-                      onClick={() => handleVideoPlay(camera.videoLink)}
+                      onClick={() => handlePhotoView(camera.photoLink)}
                     >
-                      Watch Video
+                      See Photo
                     </button>
                   </li>
                 ))}
               </ul>
             ) : (
-              <p className="text-center mt-5 text-gray-400">No past incidents found for this city.</p>
+              <p className="text-center mt-5 text-gray-400">No past Workflow found for this city.</p>
             )
           ) : (
             <p className="text-center mt-5 text-gray-400">Please select a state and city.</p>
@@ -143,26 +143,12 @@ const PastIncidents = () => {
         </div>
       </div>
 
-      {/* Right Section (Video Player) */}
-      <div className="right w-[50%] flex justify-center items-center bg-gray-800 p-5">
-        {selectedVideo ? (
-          selectedVideo.includes("youtube") ? (
-            <iframe
-              width="600"
-              height="350"
-              src={selectedVideo.replace("youtu.be/", "www.youtube.com/embed/")}
-              title="Incident Video"
-              frameBorder="0"
-              allowFullScreen
-            ></iframe>
-          ) : (
-            <video width="600" controls>
-              <source src={selectedVideo} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          )
+      {/* Right Section (Photo Viewer) */}
+      <div className="right relative w-[50%] flex justify-center items-center bg-gray-800 p-10">
+        {selectedPhoto ? (
+          <img src={selectedPhoto} alt="Incident" className="w-[75%] h-[75%] object-cover rounded-lg shadow-lg" />
         ) : (
-          <p className="text-center text-gray-400">Select a video to watch.</p>
+          <p className="text-center text-gray-400">Select a Photo to view.</p>
         )}
       </div>
     </div>

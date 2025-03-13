@@ -6,9 +6,9 @@ const incidentsData = {
       Ahmedabad: [
         {
           id: 1,
-          name: "Leakage at XYZ",
-          eventDate: "2024-02-15",
-          photo: "/photo/f1.jpg",
+          name: "Leakage at Kalupur",
+          eventDate: "2025-02-15",
+          photo: "/photo/leakage.jpg",
         },
       ],
     },
@@ -18,9 +18,9 @@ const incidentsData = {
       Ahmedabad: [
         {
           id: 1,
-          name: "Leakage at XYZ",
-          eventDate: "2024-02-15",
-          photo: "/photo/f2.jpg",
+          name: "Leakage at Kalupur",
+          eventDate: "2025-02-15",
+          photo: "/photo/drainage1.webp",
         },
       ],
     },
@@ -30,9 +30,9 @@ const incidentsData = {
       Ahmedabad: [
         {
           id: 1,
-          name: "Leakage at XYZ",
-          eventDate: "2024-02-15",
-          photo: "/photo/f3.jpg",
+          name: "Leakage at Kalupur",
+          eventDate: "2025-02-15",
+          photo: "/photo/damage1.jpg",
         },
       ],
     },
@@ -42,9 +42,9 @@ const incidentsData = {
       Ahmedabad: [
         {
           id: 1,
-          name: "Leakage at XYZ",
-          eventDate: "2024-02-15",
-          photo: "/photo/f4.jpg",
+          name: "Leakage at Kalupur",
+          eventDate: "2025-02-15",
+          photo: "/photo/hoarding.jpg",
         },
       ],
     },
@@ -94,11 +94,13 @@ const IncidentSection = ({ category }) => {
       )}
       <div className="mt-5">
         {hasIncident ? (
+          
           incidents.map((incident, index) => (
+            
             <div key={index} className="border p-4 bg-gray-700 rounded-lg mt-3 shadow-md hover:shadow-xl transition duration-300">
               <p className="font-bold text-white">{incident.name}</p>
               <p className="text-gray-300">{incident.eventDate}</p>
-              <img src={incident.photo} alt="Incident" className="mt-3 w-full rounded-lg border border-gray-500" />
+              <img src={incident.photo} alt="Incident" className=" object-cover mt-3 w-full h-[35vh] object-center rounded-lg border border-gray-500" />
             </div>
           ))
         ) : (
@@ -114,19 +116,19 @@ const IncidentReports = () => {
     <div className="w-full p-12 bg-gray-900 min-h-screen flex flex-col items-center">
       <h1 className="text-4xl font-bold text-white text-center mb-8 uppercase">Recent Works</h1>
       <div className="flex flex-wrap justify-center gap-6 mb-12">
-        {["/photo/f1.jpg", "/photo/f2.jpg", "/photo/f3.jpg", "/photo/f4.jpg", "/photo/f1.jpg"].map((src, index) => (
-          <img key={index} src={src} alt="Recent Work" className="w-36 h-36 rounded-lg shadow-lg border border-gray-500 hover:border-blue-400 hover:shadow-2xl transition" />
+        {["/photo/damage2.jpg", "/photo/hoarding.jpg", "/photo/drainage1.webp", "/photo/damage1.jpg", "/photo/leakage.jpg"].map((src, index) => (
+          <img key={index} src={src} alt="Recent Work" className="w-36 h-36 rounded-lg shadow-lg border border-gray-500 hover:border-blue-400 hover:shadow-2xl transition object-cover" />
         ))}
       </div>
-      <div className="flex flex-col bg-red-500 shrink md:flex-row justify-center gap-8 w-full max-w-8xl">
-        <div className="mx-10 flex flex-col justify-between bg-green-500 border-2 md:flex-row gap-8">
+      <div className="flex flex-col h-fit shrink md:flex-row justify-center gap-3 w-full max-w-8xl">
+        <div className="h-fit flex max-w-1/2 flex-col justify-center md:flex-row gap-8">
           {Object.keys(incidentsData).slice(0, 2).map((category, index) => (
-            <IncidentSection key={index} category={category} />
+            <div className="h-fit"  key={index}><IncidentSection className="h-fit" category={category} /></div>
           ))}
         </div>
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex max-w-1/2 h-fit flex-col justify-center md:flex-row gap-3">
           {Object.keys(incidentsData).slice(2, 4).map((category, index) => (
-            <IncidentSection key={index} category={category} />
+            <div className="h-fit" key={index}><IncidentSection className="h-fit" category={category} /></div>
           ))}
         </div>
       </div>
